@@ -2,16 +2,12 @@
 # Do not run it directly.
 
 function _bashify_path -d "Converts a fish path to something bash can recognize"
-    set fishy_path $argv
-    set bashy_path $fishy_path[1]
-    for path_part in $fishy_path[2..-1]
+    set very_fishy_path $argv
+    set bashy_path $very_fishy_path[1]
+    for path_part in $very_fishy_path[2..-1]
         set bashy_path "$bashy_path:$path_part"
     end
     echo $bashy_path
-end
-
-function _fishify_path -d "Converts a bash path to something fish can recognize"
-    echo $argv | tr ':' '\n'
 end
 
 function deactivate -d 'Exit virtualenv mode and return to the normal environment.'
@@ -75,26 +71,4 @@ end
 
 function pydoc
     python -m pydoc $argv
-end
-
-if test -z "$VIRTUAL_ENV_DISABLE_PROMPT"
-    # Copy the current `fish_prompt` function as `_old_fish_prompt`.
-    functions -c fish_prompt _old_fish_prompt
-
-    function fish_prompt
-        # Run the user's prompt first; it might depend on (pipe)status.
-        set -l prompt (_old_fish_prompt)
-
-        # Prompt override provided?
-        # If not, just prepend the environment name.
-        if test -n ''
-            printf '%s%s' '' (set_color normal)
-        else
-            printf '%s(%s) ' (set_color normal) (basename "$VIRTUAL_ENV")
-        end
-
-        string join -- \n $prompt # handle multi-line prompts
-    end
-
-    set -gx _OLD_FISH_PROMPT_OVERRIDE "$VIRTUAL_ENV"
 end
