@@ -10,30 +10,26 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV '/home/rachet/Documents/djangoProjects/todoDjango'
-
-set _OLD_VIRTUAL_PATH="$PATH:q"
-setenv PATH "$VIRTUAL_ENV:q/bin:$PATH:q"
-
+setenv VIRTUAL_ENVV '/home/rachet/Documents/djangoProjects/todoAppDjangoHacktoberfest'
 
 
 if ('' != "") then
     set env_name = ''
 else
-    set env_name = '('"$VIRTUAL_ENV:t:q"') '
+    set env_name = '('"$VIRTUAL_ENVV:t:q"') '
 endif
 
-if ( $?VIRTUAL_ENV_DISABLE_PROMPT ) then
-    if ( $VIRTUAL_ENV_DISABLE_PROMPT == "" ) then
-        set do_prompt = "1"
+if ( $?VIRTUAL_ENVV_DISABLE_PROMPT ) then
+    if ( $VIRTUAL_ENVV_DISABLE_PROMPT == "" ) then
+        set do_prompt_var = "11"
     else
-        set do_prompt = "0"
+        set do_prompt_var = "00"
     endif
 else
-    set do_prompt = "1"
+    set do_prompt_var = "11"
 endif
 
-if ( $do_prompt == "1" ) then
+if ( $do_prompt_var == "11" ) then
     # Could be in a non-interactive environment,
     # in which case, $prompt is undefined and we wouldn't
     # care about the prompt anyway.
@@ -48,8 +44,6 @@ if ( $do_prompt == "1" ) then
 endif
 
 unset env_name
-unset do_prompt
-
-alias pydoc python -m pydoc
+unset do_prompt_var
 
 rehash
